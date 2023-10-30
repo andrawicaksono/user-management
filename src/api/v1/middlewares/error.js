@@ -1,6 +1,6 @@
-const { logger } = require("../helpers/logger");
+const { Logger } = require("../handlers");
 
-module.exports.error = (err, req, res, next) => {
+module.exports.Error = (err, req, res, next) => {
     let reserror = err.message ? err.message.split(";") : "";
     if (err.message && reserror[0] === "galat") {
         let resPayload = {
@@ -13,7 +13,7 @@ module.exports.error = (err, req, res, next) => {
     }
 
     const printErr = err.stack ? err.stack.split("\n") : err;
-    logger.log("error", "server-err", {
+    Logger.log("error", "server-err", {
         data: `${printErr[0]}\n${printErr[1]}`,
     });
 

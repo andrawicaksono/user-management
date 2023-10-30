@@ -5,4 +5,4 @@ const { CheckRoutes } = require("./check");
 
 router.use("/check", CheckRoutes);
 
-module.exports.routes = router;
+module.exports.Routes = router;
