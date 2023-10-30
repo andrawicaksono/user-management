@@ -3,6 +3,17 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const user = new Schema({
+    email: {
+        type: String,
+        unique: true,
+        required: true
+    },
+
+    password: {
+        type: String,
+        required: true
+    },
+
     first_name: {
         type: String,
         required: true
@@ -15,7 +26,6 @@ const user = new Schema({
     
     gender: {
         type: String,
-        required: true,
         enum: {
             values: ["male", "female"],
             message: "{VALUE} is not supported"
@@ -23,16 +33,11 @@ const user = new Schema({
     },
 
     date_of_birth: {
-        type: Date
-    },
-
-    email: {
-        type: String,
-        unique: true
+        type: Date,
     },
 
     phone: {
-        type: String
+        type: String,
     },
 
     address: {
@@ -40,10 +45,6 @@ const user = new Schema({
     },
 
     photo: {
-        type: String
-    },
-    
-    password: {
         type: String
     },
 
