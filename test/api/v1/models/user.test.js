@@ -1,5 +1,5 @@
-const { User } = require("../../src/api/v1/models");
-const { dbTest } = require("../dbTest");
+const { User } = require("../../../../src/api/v1/models");
+const { dbTest } = require("../../../dbTest");
 
 beforeAll(async () => {
     await dbTest.setUp();
