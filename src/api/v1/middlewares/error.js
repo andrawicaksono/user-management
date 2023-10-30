@@ -2,11 +2,10 @@ const { Logger } = require("../handlers");
 
 module.exports.Error = (err, req, res, next) => {
     let reserror = err.message ? err.message.split(";") : "";
-    if (err.message && reserror[0] === "galat") {
+    if (err.message && reserror[0] === "error") {
         let resPayload = {
             err_code: reserror[2],
             err_message: reserror[3],
-            err_message_en: reserror[4],
         };
 
         return res.status(parseInt(reserror[1])).json(resPayload);
@@ -19,7 +18,6 @@ module.exports.Error = (err, req, res, next) => {
 
     return res.status(500).send({
         err_code: "ERRSYS",
-        err_message: "kesalahan pada sistem!",
-        err_message_en: "internal server error!",
+        err_message: "internal server error!",
     });
 };
