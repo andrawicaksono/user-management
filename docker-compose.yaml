@@ -27,6 +27,7 @@ services:
       - DB_PASSWORD=$MONGODB_PASSWORD
       - DB_NAME=$MONGODB_DATABASE
       - DB_PORT=$MONGODB_PORT
+      - JWT_SECRET=$JWT_SECRET
     stdin_open: true
     tty: true
 
