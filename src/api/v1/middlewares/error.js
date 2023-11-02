@@ -17,7 +17,7 @@ module.exports.Error = (err, req, res, next) => {
     });
 
     return res.status(500).send({
-        err_code: "ERRSYS",
+        err_code: "000",
         err_message: "internal server error!",
     });
 };
