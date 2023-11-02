@@ -12,7 +12,7 @@ services:
       - "$MONGODB_PORT:$MONGODB_PORT"
     volumes:
       - db:/data/db
-  app:
+  api:
     depends_on:
       - mongodb
     build: .
@@ -28,6 +28,7 @@ services:
       - DB_NAME=$MONGODB_DATABASE
       - DB_PORT=$MONGODB_PORT
       - JWT_SECRET=$JWT_SECRET
+      - ADMIN_SECRET=$ADMIN_SECRET
     stdin_open: true
     tty: true
 
