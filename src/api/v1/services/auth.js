@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
+const { ERROR } = require("../helpers");
 
 const jwtSecret = process.env.JWT_SECRET;
 
@@ -11,7 +12,7 @@ module.exports.AuthService = (UserRepository) => {
                 if (errCheckUser) return [null, errCheckUser];
         
                 if (checkUser) {
-                    return [null, Error("error;400;email has already registered!")];
+                    return [null, ERROR.EMAIL_REGISTERED];
                 }
         
                 const salt = await bcrypt.genSalt(10);
@@ -36,11 +37,11 @@ module.exports.AuthService = (UserRepository) => {
             try {
                 const [user, errUser] = await UserRepository.findUserByEmail(data.email);
                 if (errUser) return [null, errUser];
-                if (!user) return [null, Error("error;404;user not found!")];
+                if (!user) return [null, ERROR.USER_NOT_FOUND];
         
                 const isPassed = await bcrypt.compare(data.password, user.password);
                 if (!isPassed)
-                    return [null, Error("error;400;wrong password!")];
+                    return [null, ERROR.WRONG_PASSWORD];
         
                 let payload = {
                     id: user._id,

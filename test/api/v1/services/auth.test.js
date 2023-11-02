@@ -7,6 +7,11 @@ const UserRepository = {
   create: jest.fn(),
 };
 
+beforeEach(() => {
+  UserRepository.findUserByEmail.mockReset();
+  UserRepository.create.mockReset();
+});
+
 const jwtSecret = "secret";
 
 const authService = AuthService(UserRepository);
@@ -43,7 +48,7 @@ describe("AuthService", () => {
       const [user, errUser] = await authService.register(userData);
 
       expect(user).toBeNull();
-      expect(errUser).toEqual(Error("error;400;email has already registered!"));
+      expect(errUser).toEqual(Error("error;400;001;email has already registered!"));
     });
 
     it("should handle registration error", async () => {
@@ -111,7 +116,7 @@ describe("AuthService", () => {
       const [result, errResult] = await authService.login(userData);
 
       expect(result).toBeNull();
-      expect(errResult).toEqual(Error("error;400;wrong password!"));
+      expect(errResult).toEqual(Error("error;400;003;wrong password!"));
     });
 
     it("should handle login when the user does not exist", async () => {
@@ -125,7 +130,7 @@ describe("AuthService", () => {
       const [result, errResult] = await authService.login(userData);
 
       expect(result).toBeNull();
-      expect(errResult).toEqual(Error("error;404;user not found!"));
+      expect(errResult).toEqual(Error("error;404;002;user not found!"));
     });
 
     it("should handle login error", async () => {
