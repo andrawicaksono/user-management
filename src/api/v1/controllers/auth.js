@@ -40,14 +40,14 @@ module.exports.AuthController = (AuthService) => {
                     password
                 };
         
-                const [{user, token}, errUser] = await AuthService.login(data);
+                const [user, errUser] = await AuthService.login(data);
                 if (errUser) throw errUser;
         
                 return res.status(200).send({
                     status: 200,
                     iserror: false,
                     message: "login success",
-                    data: ResponseFormatter.Auth.login(user, token)
+                    data: ResponseFormatter.Auth.login(user.user, user.token)
                 });
             } catch (err) {
                 next(err)
